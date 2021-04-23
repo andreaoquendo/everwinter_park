@@ -26,7 +26,7 @@ void imprime_texto(char *nome_arq){
 int main(void)
 {
 
-    imprime_texto("0001.txt");
+    imprime_texto("text/0001.txt");
 
     return 0;
 }
