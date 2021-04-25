@@ -19,12 +19,11 @@ typedef struct grafo {
 
 /* FUNÇÕES DO PROJETO */
 char* get_texto (int linha, FILE* arq); // inserir FILE como parâmetro
-int conta_linhas(FILE* file); 
+int conta_linhas(FILE* file);
 int get_dado(Grafo *g, int linha);
-void inserir_aresta (Grafo *G, int u, int v), FILE* arq; //mudar ela
+void inserir_aresta (Grafo *G, int u, int v); //mudar ela
 void liberar_grafo (Grafo *G); // ultima coisa a ser implementada
-
-
+void imprime_texto(char *nome_arq);
 void build();
 /*
     | O que irá conter o build? |
@@ -51,10 +50,10 @@ void play();
     - cada vértice irá apontar para x vértices tal que x pertence a N entre [2,4];
     - opções fucam na mesma linha que a história/pergunta/problema
     IDEIAS:
-    - colocar pesos, para decidir final - DESCOBRIR ONDE COLOCAR OS PESOS 
+    - colocar pesos, para decidir final - DESCOBRIR ONDE COLOCAR OS PESOS
     PERGUNTAS E FUNÇÕES:
     - como fazer o C ler e printar o arquivo de texto.
-    - função 
+    - função
 */
 
 

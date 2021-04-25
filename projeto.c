@@ -12,7 +12,7 @@ Grafo* criar_grafo (int tamanho) {
    return G;
 }
 
-char* get_texto (int linha){
+char* get_texto (int linha, FILE* arq){
     /*obtem a string da linha*/
 }
 
@@ -23,6 +23,7 @@ int conta_linhas(FILE* file){
 int get_dado(Grafo *g, int linha) {
     //return g->listaAdj[linha]->dado;
 }
+
 
 void inserir_aresta (Grafo *G, int u, int v) { // u é a posição na lista pelo que eu entendi, v é o identoficadoe
    Vertice *temp, *ultimo = NULL;
@@ -51,5 +52,38 @@ void inserir_aresta (Grafo *G, int u, int v) { // u é a posição na lista pelo
 }
 
 int main(){
+
+    char iniciar;
+    // tela de início  que talvez fique melhor no run();
+
+    imprime_texto("text/init.txt");
+
+    iniciar=fgetc(stdin);
+    if(iniciar==0x0A){
+        printf("\n vamos iniciar entao");
+    }
     return 0;
+
+
+
+
+void imprime_texto(char *nome_arq){
+
+    char c;
+    FILE* texto = fopen(nome_arq, "r");
+    if(texto){
+        while ((c = getc(texto)) != EOF){
+            if(c == '%'){ // o "\" é usado como identificador de parágrafo
+                printf("\n");
+                sleep(2);
+                continue;
+            }
+            putchar(c); //printa letra por letra
+        }
+        fclose(texto);
+    } else {
+        printf("ERROR: %s NOT FOUND\n", nome_arq);
+
+    }
+
 }
