@@ -4,24 +4,25 @@
 /* ESTRUTURA DO GRAFO*/
 
 typedef struct vertice {
-   char* dado; //tipo file ou sei la string
-   int linha; // numero da linha no arquivo de texto, identificador
-   struct vertice *proximo; // próximo nó da lista encadeada
-    //peso
+
+   char* nome_arq;
+   int identificador; // a posicao na lista de adj
+   struct vertice *proximo; 
 
 } Vertice;
 
 typedef struct grafo {
-   int E; /* Quantidade de arestas. */
-   int V; /* Quantidade de vértices. */
-   Vertice **listaAdj; /* Lista de adjacências: lista de ponteiros de vértices */
+   int arestas; 
+   int V; 
+   Vertice **listaAdj; // Lista de adjacências: lista de ponteiros de vértices 
 } Grafo;
 
-/* FUNÇÕES DO PROJETO */
+Grafo* criar_grafo (int tamanho);
+void inserir_aresta (Grafo *G, int u, int v, char* vect[]); 
+
 char* get_texto (int linha, FILE* arq); // inserir FILE como parâmetro
 int conta_linhas(FILE* file);
 int get_dado(Grafo *g, int linha);
-void inserir_aresta (Grafo *G, int u, int v); //mudar ela
 void liberar_grafo (Grafo *G); // ultima coisa a ser implementada
 void imprime_texto(char *nome_arq);
 void build();
