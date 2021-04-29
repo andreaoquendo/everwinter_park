@@ -1,7 +1,8 @@
 #include "projeto.h"
-#define TAM 2
+#define TAM 4
 #define STR 14
-#include <time.h>
+//#include <time.h>
+//#include <locale.h>
 
 Grafo* criar_grafo (int tamanho) {
    int v;
@@ -15,10 +16,10 @@ Grafo* criar_grafo (int tamanho) {
    return G;
 }
 
-void inserir_aresta (Grafo *G, int u, int v, char** vect) {
+void inserir_aresta (Grafo *G, int u, int v) {
+
    Vertice *temp, *ultimo = NULL;
 
-   /* Verificando se o vértice v já existe na lista de adjacência de u: */
     for (temp = G->listaAdj[u]; temp != NULL; temp = temp->proximo) {
         if (temp->identificador == v) {
             return;
@@ -26,89 +27,80 @@ void inserir_aresta (Grafo *G, int u, int v, char** vect) {
         ultimo = temp;
     }
 
-   /* Inserindo a aresta (u,v): */
     Vertice *novo = (Vertice *)malloc(sizeof(Vertice));
-    novo->nome_arq = vect[v];
     novo->identificador = v;
     novo->proximo = NULL;
     if (ultimo != NULL) {
-      /* Inserção na última posição da lista: */
        ultimo->proximo = novo;
+       G->listaAdj[u]->n_arestas++;
     }
     else {
-      /* Nova cabeça da lista: */
         G->listaAdj[u] = novo;
+        G->listaAdj[u]->n_arestas = 1;
     }
-   /* Incrementando o número de arestas: */
     G->arestas++;
 }
 
 void vetor_historia(char **v){
 
-    v[0] = (char*)malloc(STR*sizeof(char));
-    strcpy(v[0],"text/0001.txt");
-    v[1] = (char*)malloc(STR*sizeof(char));
-    strcpy(v[1], "text/0002.txt");
+    int i;
+    for(int j =0; j < TAM-1; j++){
+        v[j]=(char*)malloc(STR*sizeof(char));
+    }
 
-    // 0 = 48, 9 = 57
-    /*int i;
+    for(i = 0; i < TAM-1; i++){
+        if(i < 10){
+            char c = i + 1 + '0';
+            char temp[STR] = {'t','e','x','t','/','0','0','0', c,'.','t','x','t'};
+            strcpy(v[i], temp);
+        }
+        if(i >= 10 && i < 99){
+            char c = i + 1 + '0';
+            char temp[STR] = {'t','e','x','t','/','0','0', c,'.','t','x','t'};
+            strcpy(v[i], temp);
+        }
+    }
+}
 
-    for i from 0 to tam v[i] = '0000.txt';
-
-    i/10<1
-
-    for(i = 0; i < TAM; i++){
-        if(i < 10)
-            v[i] = '000'i'.txt'; // v[3] = ('0'*(i%10));
-        if(i >= 10 && i < 99)
-            v[i] = '00'i'.txt';
-    }*/
+void liberar_historias(char **v){
+    //implementar
 }
 
 void escolher(char **v, Grafo* g, int id){
-    printf("\nENTREI NA ESCOLHA %d\n", id);
+    if(g->listaAdj[id]==NULL){
+        printf("FIM DA HISTÓRIA");
+        return;
+    }
 
-    if (g->listaAdj[id] != NULL){
-        acesso_vertice(id, v);
-        if(!g->listaAdj[id]->proximo){
-            printf("VOCÊ MORREU\n");
-            return;
+    int ch;
+
+    printf("\nQual a sua escolha?\n");
+
+    scanf("%d", &ch);
+    while(1){
+        if(ch > 0 && ch <= g->listaAdj[id]->n_arestas){
+            ch-=1;
+            Vertice* temp = g->listaAdj[id];
+            //sleep(2);
+            int i = 0;
+            while (i < ch) {
+                temp = temp->proximo;
+                i++;
+            }
+
+            acesso_vertice(temp->identificador, v);
+            escolher(v, g, temp->identificador);
+            break;
         }
-        Vertice *temp;
-        Vertice **listaTemp = (Vertice **)malloc(sizeof(Vertice));
+        else {
 
-        int a = 0, i;
-
-        for(i = 0, temp = g->listaAdj[id]  ; temp != NULL ; temp = temp->proximo, i++){
-            listaTemp[i] = temp;
-            a++;
-
-        }
-        int ch;
-        while(scanf("%d", &ch)){
-            if(ch > 0 && ch <= a){
-                switch (ch){
-                    case 1:
-                        escolher(v, g, listaTemp[0]->identificador);
-                        break;
-                    case 2:
-                        escolher(v, g, listaTemp[1]->identificador);
-                        break;
-                    case 3:
-                        escolher(v, g, listaTemp[2]->identificador);
-                        break;
-                    case 4:
-                        escolher(v, g, listaTemp[3]->identificador);
-                        break;
-                    default:
-                        break;
-                }
+            printf("ERROR[INVALID INPUT]: PLEASE CHOOSE AGAIN OR ENTER -1 TO LEAVE\n");
+            while ((ch = getchar()) != EOF && ch != '\n');
+            scanf("%d", &ch);
+            if (ch == -1)
                 break;
-            }
-            else {
-                printf("ERROR[INVALID INPUT]: PLEASE CHOOSE AGAIN\n");
-            }
         }
+
     }
 
 }
@@ -120,6 +112,7 @@ void acesso_vertice(int id, char **v){
 void imprime_texto(char *nome_arq){
 
     char c;
+    system("clear");
     FILE* texto = fopen(nome_arq, "r");
     if(texto){
         while ((c = getc(texto)) != EOF){
@@ -128,7 +121,7 @@ void imprime_texto(char *nome_arq){
                 //sleep(2);
                 continue;
             }
-            putchar(c); //printa letra por letra
+            putchar(c);
         }
         fclose(texto);
     } else {
@@ -138,31 +131,48 @@ void imprime_texto(char *nome_arq){
 
 }
 
-int main(){
+void liberar_grafo (Grafo *G) {
+   int v;
+   for (v = 0; v < G->V; v++) {
+      if (G->listaAdj[v] != NULL) {
+         free(G->listaAdj[v]);
+      }
+   }
+   free(G->listaAdj);
+   free(G);
+}
 
-    char* vetor_nomes[TAM];
-    vetor_historia(vetor_nomes);
+void build(Grafo* g, char **v){
 
-    Grafo* g = criar_grafo(TAM);
-    inserir_aresta(g, 0, 0, vetor_nomes);
-    inserir_aresta(g, 0, 1, vetor_nomes);
-    inserir_aresta(g, 1, 1, vetor_nomes);
+    inserir_aresta(g, 0, 1);
+    inserir_aresta(g, 0, 2);
 
-    escolher(vetor_nomes, g, 0);
+    vetor_historia(v);
 
+}
 
-
-/*
+void play(Grafo* g, char **v){
     char iniciar;
 
-    char* nomes[TAM];
-
     imprime_texto("text/init.txt");
-
     iniciar=fgetc(stdin);
+
     if(iniciar==0x0A){
-        printf("\n vamos iniciar entao");
+        imprime_texto(v[0]);
+        escolher(v, g, 0);
     }
+}
+
+int main(){
+    //setlocale(LC_ALL, "Portuguese");
+
+    Grafo* g = criar_grafo(TAM);
+    char* vetor_nomes[TAM];
+
+    build(g, vetor_nomes);
+    play(g, vetor_nomes);
+
+    liberar_grafo(g);
+
     return 0;
-*/
 }
