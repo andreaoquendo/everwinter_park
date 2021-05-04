@@ -157,10 +157,11 @@ void play(Grafo* g, char **v){
     imprime_texto("text/init.txt");
     iniciar=fgetc(stdin);
 
-    if(iniciar==0x0A){
-        imprime_texto(v[0]);
-        escolher(v, g, 0);
+    while(iniciar!=0x0A){
+        iniciar=fgetc(stdin);
     }
+    imprime_texto(v[0]);
+    escolher(v, g, 0);
 }
 
 int main(){
