@@ -1,9 +1,10 @@
 #include "projeto.h"
 #define TAM 4
 #define STR 14
-//#include <time.h>
-//#include <locale.h>
+#include <time.h>
 
+/*Inicializa o grafo com tamanho constante TAM, correspondente a quantidade 
+de pontos na história*/
 Grafo* criar_grafo (int tamanho) {
    int v;
    Grafo *G = (Grafo *)malloc(sizeof(Grafo));
@@ -16,6 +17,7 @@ Grafo* criar_grafo (int tamanho) {
    return G;
 }
 
+/*Coloca o vértice "v" na lista de adjacências do vértice "u"*/
 void inserir_aresta (Grafo *G, int u, int v) {
 
    Vertice *temp, *ultimo = NULL;
@@ -41,6 +43,7 @@ void inserir_aresta (Grafo *G, int u, int v) {
     G->arestas++;
 }
 
+/*Cria o vetor com os nomes dos arquivos de texto*/
 void vetor_historia(char **v){
 
     int i;
@@ -62,10 +65,10 @@ void vetor_historia(char **v){
     }
 }
 
-void liberar_historias(char **v){
-    //implementar
-}
-
+/*
+A funcao escolher é o mecanismo resposável por receber a da escolha feita pelo usuário
+e direciona-lo para o próximo vértice da história
+*/
 void escolher(char **v, Grafo* g, int id){
     if(g->listaAdj[id]==NULL){
         printf("FIM DA HISTÓRIA");
@@ -81,7 +84,7 @@ void escolher(char **v, Grafo* g, int id){
         if(ch > 0 && ch <= g->listaAdj[id]->n_arestas){
             ch-=1;
             Vertice* temp = g->listaAdj[id];
-            //sleep(2);
+            sleep(2);
             int i = 0;
             while (i < ch) {
                 temp = temp->proximo;
@@ -105,10 +108,20 @@ void escolher(char **v, Grafo* g, int id){
 
 }
 
+/*
+A função acesso_vertice é auxiliar, só utilizada para imprimir o texto correspondente 
+ao vértice
+*/
 void acesso_vertice(int id, char **v){
     imprime_texto(v[id]);
 }
 
+/*
+A funcao imprime_texto tem como parâmetro uma string: 
+- o nome do arquivo a ser impresso no console
+A partir disso, ele imprime caráctere por caráctere e caso for encontrado um "%" ele esperará
+2 segundos para continuar a imprimir (para que todo o texto não seja mostrado de uma única vez)
+*/
 void imprime_texto(char *nome_arq){
 
     char c;
@@ -118,7 +131,7 @@ void imprime_texto(char *nome_arq){
         while ((c = getc(texto)) != EOF){
             if(c == '%'){
                 printf("\n");
-                //sleep(2);
+                sleep(2);
                 continue;
             }
             putchar(c);
@@ -131,6 +144,7 @@ void imprime_texto(char *nome_arq){
 
 }
 
+// A funcao liberar_grafo libera a memória alocada do grafo
 void liberar_grafo (Grafo *G) {
    int v;
    for (v = 0; v < G->V; v++) {
@@ -142,6 +156,11 @@ void liberar_grafo (Grafo *G) {
    free(G);
 }
 
+/* 
+A funcao build é encarregada de montar o jogo. Nela:
+- todas as arestas são inseridas
+- é chamado vetor_historia, que coloca o nome dos arquivos txt no vetor de strings v
+*/
 void build(Grafo* g, char **v){
 
     inserir_aresta(g, 0, 1);
@@ -150,6 +169,12 @@ void build(Grafo* g, char **v){
     vetor_historia(v);
 
 }
+
+
+/*
+A função play é responsável por dar início ao jogo. Ela imprime o trecho inicial do jogo,
+e manda à função escolher o primeiro vértice.
+*/
 
 void play(Grafo* g, char **v){
     char iniciar;
@@ -165,7 +190,6 @@ void play(Grafo* g, char **v){
 }
 
 int main(){
-    //setlocale(LC_ALL, "Portuguese");
 
     Grafo* g = criar_grafo(TAM);
     char* vetor_nomes[TAM];
