@@ -1,5 +1,5 @@
 #include "projeto.h"
-#define TAM 24
+#define TAM 46
 #define STR 14
 #include <time.h>
 
@@ -47,19 +47,19 @@ void inserir_aresta (Grafo *G, int u, int v) {
 void vetor_historia(char **v){
 
     int i;
-    for(int j =0; j < TAM-1; j++){
+    for(int j =0; j < TAM; j++){
         v[j]=(char*)malloc(STR*sizeof(char));
     }
 
-    for(i = 0; i < TAM-1; i++){
+    for(i = 0; i < TAM; i++){
         if(i < 10){
             char c = i + '0';
             char temp[STR] = {'t','e','x','t','/','0','0','0', c,'.','t','x','t'};
             strcpy(v[i], temp);
         }
         if(i >= 10 && i < 99){
-            char c = i/10 + '0';
-            char d = i%10 + 1 + '0';
+            char c = i%10 + '0';
+            char d = i/10 + '0';
             char temp[STR] = {'t','e','x','t','/','0','0',d,  c,'.','t','x','t'};
             strcpy(v[i], temp);
         }
