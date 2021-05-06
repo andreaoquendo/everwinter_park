@@ -1,8 +1,6 @@
-— Okay galera! Noah e eu vamos lá ver a montanha-russa pequena. Façam-nos o favor de não se perderem por aí. Alex, sei que a maior preocupação deve ser sua, mas, olhos grudados no Quinn — Nick virou a cabeça em minha direção — Vamos?
-
-%[...]
-
-1 - — Ir na casa de espelhos parece daora! Vamos então!
-2 - — Achei a montanha-russa mais divertida… Por que não vamos pra lá?
-
-
+— Ótimo, Noah e eu vamos vamos dar um olhada na parte esquerda do parque e vocês garotos… Bom, tentem não sujar suas calças e nem gritar muito caso vejam alguma coisa — brincou Alex enquanto enganchava nossos braços e nos puxava mais a fundo no parque.
+[...]
+Ao chegarmos no local nos deparamos com múltiplos brinquedos, entre eles uma estrutura com paredes escuras, que possuía uma placa com pintura desgastada cheia de desenhos de pequenos fantasmas e escrito “Casa Mal Assombrada”, e ao lado havia um carrossel, mas no lugar de cavalos e carruagens haviam cabras e caixões.
+— Quem foi o gênio da arquitetura que achou uma boa idéia colocar crianças dentro de caixões para andar de carrossel? — perguntou Alex com cara de nojo — De qualquer forma, eu preferia não chegar perto daquela coisa tão cedo, mas o aniversário é seu, então, o que você prefere?
+(1) — Nós viemos atrás do sobrenatural, nada mais justo procurar no brinquedo mais macabro que vimos até agora, vamos no carrossel mesmo.
+(2) — Esse carrossel é macabro demais, até para mim. Acho que prefiro ir à Casa Mal Assombrada.
