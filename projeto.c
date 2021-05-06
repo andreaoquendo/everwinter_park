@@ -85,7 +85,6 @@ void escolher(char **v, Grafo* g, int id){
         if(ch > 0 && ch <= g->listaAdj[id]->n_arestas){
             ch-=1;
             Vertice* temp = g->listaAdj[id];
-            sleep(2);
             int i = 0;
             while (i < ch) {
                 temp = temp->proximo;
@@ -133,7 +132,6 @@ void imprime_texto(char *nome_arq){
         while ((c = getc(texto)) != EOF){
             if(c == '%'){
                 printf("\n");
-                sleep(2);
                 continue;
             }
             putchar(c);
