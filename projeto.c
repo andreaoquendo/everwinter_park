@@ -53,12 +53,12 @@ void vetor_historia(char **v){
 
     for(i = 0; i < TAM-1; i++){
         if(i < 10){
-            char c = i + 1 + '0';
+            char c = i + '0';
             char temp[STR] = {'t','e','x','t','/','0','0','0', c,'.','t','x','t'};
             strcpy(v[i], temp);
         }
         if(i >= 10 && i < 99){
-            char c = i + 1 + '0';
+            char c = i/10 + '0';
             char d = i%10 + 1 + '0';
             char temp[STR] = {'t','e','x','t','/','0','0',d,  c,'.','t','x','t'};
             strcpy(v[i], temp);
