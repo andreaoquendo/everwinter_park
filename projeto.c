@@ -1,9 +1,9 @@
 #include "projeto.h"
-#define TAM 4
+#define TAM 24
 #define STR 14
 #include <time.h>
 
-/*Inicializa o grafo com tamanho constante TAM, correspondente a quantidade 
+/*Inicializa o grafo com tamanho constante TAM, correspondente a quantidade
 de pontos na história*/
 Grafo* criar_grafo (int tamanho) {
    int v;
@@ -59,7 +59,8 @@ void vetor_historia(char **v){
         }
         if(i >= 10 && i < 99){
             char c = i + 1 + '0';
-            char temp[STR] = {'t','e','x','t','/','0','0', c,'.','t','x','t'};
+            char d = i%10 + 1 + '0';
+            char temp[STR] = {'t','e','x','t','/','0','0',d,  c,'.','t','x','t'};
             strcpy(v[i], temp);
         }
     }
@@ -109,7 +110,7 @@ void escolher(char **v, Grafo* g, int id){
 }
 
 /*
-A função acesso_vertice é auxiliar, só utilizada para imprimir o texto correspondente 
+A função acesso_vertice é auxiliar, só utilizada para imprimir o texto correspondente
 ao vértice
 */
 void acesso_vertice(int id, char **v){
@@ -117,7 +118,7 @@ void acesso_vertice(int id, char **v){
 }
 
 /*
-A funcao imprime_texto tem como parâmetro uma string: 
+A funcao imprime_texto tem como parâmetro uma string:
 - o nome do arquivo a ser impresso no console
 A partir disso, ele imprime caráctere por caráctere e caso for encontrado um "%" ele esperará
 2 segundos para continuar a imprimir (para que todo o texto não seja mostrado de uma única vez)
@@ -125,8 +126,9 @@ A partir disso, ele imprime caráctere por caráctere e caso for encontrado um "
 void imprime_texto(char *nome_arq){
 
     char c;
-    system("clear");
+    system("cls");
     FILE* texto = fopen(nome_arq, "r");
+    printf("\nAbrindo arquivo %s...\n", nome_arq);
     if(texto){
         while ((c = getc(texto)) != EOF){
             if(c == '%'){
@@ -156,7 +158,7 @@ void liberar_grafo (Grafo *G) {
    free(G);
 }
 
-/* 
+/*
 A funcao build é encarregada de montar o jogo. Nela:
 - todas as arestas são inseridas
 - é chamado vetor_historia, que coloca o nome dos arquivos txt no vetor de strings v
@@ -165,7 +167,9 @@ void build(Grafo* g, char **v){
 
     inserir_aresta(g, 0, 1);
     inserir_aresta(g, 0, 2);
-
+    inserir_aresta(g, 0, 3);
+    inserir_aresta(g, 2, 6);
+    inserir_aresta(g, 2, 7);
     vetor_historia(v);
 
 }
