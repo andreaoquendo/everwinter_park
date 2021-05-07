@@ -1,7 +1,6 @@
 #include "projeto.h"
 #define TAM 46
 #define STR 14
-#include <time.h>
 
 /*Inicializa o grafo com tamanho constante TAM, correspondente a quantidade
 de pontos na história*/
@@ -122,7 +121,7 @@ A partir disso, ele imprime caráctere por caráctere e caso for encontrado um "
 void imprime_texto(char *nome_arq){
 
     char c;
-    system("clear");
+    system("cls");
     FILE* texto = fopen(nome_arq, "r");
     if(texto){
         while ((c = getc(texto)) != EOF){
