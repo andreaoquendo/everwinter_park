@@ -72,7 +72,7 @@ e direciona-lo para o próximo vértice da história
 */
 void escolher(char **v, Grafo* g, int id){
     if(g->listaAdj[id]==NULL){
-        printf("FIM DA HISTÓRIA");
+        printf("\nFIM DA HISTÓRIA\n");
         return;
     }
 
@@ -125,9 +125,8 @@ A partir disso, ele imprime caráctere por caráctere e caso for encontrado um "
 void imprime_texto(char *nome_arq){
 
     char c;
-    system("cls");
+    system("clear");
     FILE* texto = fopen(nome_arq, "r");
-    printf("\nAbrindo arquivo %s...\n", nome_arq);
     if(texto){
         while ((c = getc(texto)) != EOF){
             if(c == '%'){
