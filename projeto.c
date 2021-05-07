@@ -115,8 +115,7 @@ void acesso_vertice(int id, char **v){
 /*
 A funcao imprime_texto tem como parâmetro uma string:
 - o nome do arquivo a ser impresso no console
-A partir disso, ele imprime caráctere por caráctere e caso for encontrado um "%" ele esperará
-2 segundos para continuar a imprimir (para que todo o texto não seja mostrado de uma única vez)
+A partir disso, ele imprime caráctere por caráctere.
 */
 void imprime_texto(char *nome_arq){
 
@@ -125,10 +124,6 @@ void imprime_texto(char *nome_arq){
     FILE* texto = fopen(nome_arq, "r");
     if(texto){
         while ((c = getc(texto)) != EOF){
-            if(c == '%'){
-                printf("\n");
-                continue;
-            }
             putchar(c);
         }
         fclose(texto);
