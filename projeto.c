@@ -120,7 +120,7 @@ A partir disso, ele imprime caráctere por caráctere.
 void imprime_texto(char *nome_arq){
 
     char c;
-    system("cls");
+    system("clear");
     FILE* texto = fopen(nome_arq, "r");
     if(texto){
         while ((c = getc(texto)) != EOF){
