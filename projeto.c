@@ -23,9 +23,6 @@ void inserir_aresta (Grafo *G, int u, int v) {
    Vertice *temp, *ultimo = NULL;
 
     for (temp = G->listaAdj[u]; temp != NULL; temp = temp->proximo) {
-        if (temp->identificador == v) {
-            return;
-        }
         ultimo = temp;
     }
 
