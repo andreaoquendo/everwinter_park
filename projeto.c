@@ -214,6 +214,8 @@ void build(Grafo* g, char **v){
     inserir_aresta(g, 33, 36);
     inserir_aresta(g, 34, 38);
     inserir_aresta(g, 37, 39);
+    inserir_aresta(g, 38, 40);
+    inserir_aresta(g, 38, 41);
     inserir_aresta(g, 39, 42);
     inserir_aresta(g, 39, 43);
     inserir_aresta(g, 41, 14);
